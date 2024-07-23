@@ -15,6 +15,7 @@ pygame.display.set_caption("Bouncing Pokéball")
 
 # Load the Pokéball image
 ball = pygame.image.load("pokeball.png")
+ball = pygame.transform.scale(ball, (50, 50))  # Scale the image if it's too big
 ballrect = ball.get_rect()
 
 # Main game loop
@@ -23,6 +24,11 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if ballrect.collidepoint(event.pos):
+                # Reverse the direction of the ball when clicked
+                BALL_SPEED[0] = -BALL_SPEED[0]
+                BALL_SPEED[1] = -BALL_SPEED[1]
 
     # Move the ball
     ballrect = ballrect.move(BALL_SPEED)
