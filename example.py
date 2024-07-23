@@ -1,25 +1,41 @@
-import sys, pygame
+import sys
+import pygame
+
+# Initialize Pygame
 pygame.init()
 
-size = width, height = 800, 600
-speed = [1, 1]
-black = 0, 0, 0
+# Constants
+WINDOW_WIDTH, WINDOW_HEIGHT = 800, 600
+BALL_SPEED = [5, 5]
+BLACK = (0, 0, 0)
 
-screen = pygame.display.set_mode(size)
+# Set up the display
+screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+pygame.display.set_caption("Bouncing Pokéball")
 
-ball = pygame.image.load("intro_ball.gif")
+# Load the Pokéball image
+ball = pygame.image.load("pokeball.png")
 ballrect = ball.get_rect()
 
+# Main game loop
 while True:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
 
-    ballrect = ballrect.move(speed)
-    if ballrect.left < 0 or ballrect.right > width:
-        speed[0] = -speed[0]
-    if ballrect.top < 0 or ballrect.bottom > height:
-        speed[1] = -speed[1]
+    # Move the ball
+    ballrect = ballrect.move(BALL_SPEED)
+    if ballrect.left < 0 or ballrect.right > WINDOW_WIDTH:
+        BALL_SPEED[0] = -BALL_SPEED[0]
+    if ballrect.top < 0 or ballrect.bottom > WINDOW_HEIGHT:
+        BALL_SPEED[1] = -BALL_SPEED[1]
 
-    screen.fill(black)
+    # Clear the screen
+    screen.fill(BLACK)
+    # Draw the ball
     screen.blit(ball, ballrect)
+    # Update the display
     pygame.display.flip()
+    # Control the frame rate
+    pygame.time.Clock().tick(60)
