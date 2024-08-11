@@ -5,7 +5,7 @@ import pygame
 pygame.init()
 
 # Constants
-WINDOW_WIDTH, WINDOW_HEIGHT = 800, 600
+WINDOW_WIDTH, WINDOW_HEIGHT = 1000, 800
 BALL_SPEED = [5, 5]
 BLACK = (0, 0, 0)
 
